@@ -1,16 +1,16 @@
-\# Plan Card Template
+﻿# Plan Card Template
 
 
 
-\## Task ID
+## Task ID
 
 
 
-task\_XXX
+task_XXX
 
 
 
-\## Goal
+## Goal
 
 
 
@@ -18,7 +18,7 @@ Write the concrete goal of this task in 1-3 sentences.
 
 
 
-\## Scope
+## Scope
 
 
 
@@ -26,7 +26,7 @@ Allowed files or directories:
 
 
 
-\- 
+- 
 
 
 
@@ -34,23 +34,23 @@ Forbidden files or directories:
 
 
 
-\- 
+- 
 
 
 
-\## Requirements
+## Requirements
 
 
 
-\- 
+- 
 
-\- 
+- 
 
-\- 
+- 
 
 
 
-\## Acceptance Criteria
+## Acceptance Criteria
 
 
 
@@ -58,15 +58,15 @@ The task is complete when:
 
 
 
-\- \[ ] 
+- [ ] 
 
-\- \[ ] 
+- [ ] 
 
-\- \[ ] 
+- [ ] 
 
 
 
-\## Verification
+## Verification
 
 
 
@@ -74,7 +74,7 @@ Commands to run:
 
 
 
-\- 
+- 
 
 
 
@@ -82,19 +82,19 @@ Expected result:
 
 
 
-\- 
+- 
 
 
 
-\## Risks
+## Risks
 
 
 
-\- 
+- 
 
 
 
-\## Agent Report Requirements
+## Agent Report Requirements
 
 
 
@@ -102,13 +102,15 @@ After finishing, the agent must report:
 
 
 
-1\. Files changed
+1. Files changed
 
-2\. Why each file changed
+2. Why each file changed
 
-3\. Commands run
+3. Commands run
 
-4\. Test results
+4. Test results
 
-5\. Known limitations
+5. Known limitations
+
+
 

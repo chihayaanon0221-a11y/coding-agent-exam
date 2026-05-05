@@ -1,16 +1,16 @@
-\# Git Workflow
+﻿# Git Workflow
 
 
 
-\## Branch Rules
+## Branch Rules
 
 
 
-\- main is the stable branch.
+- main is the stable branch.
 
-\- Each agent attempt should use a separate branch.
+- Each agent attempt should use a separate branch.
 
-\- Branch name format:
+- Branch name format:
 
 
 
@@ -26,7 +26,7 @@ agent/task-001-codex
 
 
 
-\## Commit Rules
+## Commit Rules
 
 
 
@@ -50,7 +50,7 @@ task-001: implement todo cli commands
 
 
 
-\## Before Commit
+## Before Commit
 
 
 
@@ -58,13 +58,13 @@ The agent should run:
 
 
 
-\- git status
+- git status
 
-\- git diff
+- git diff
 
 
 
-\## After Commit
+## After Commit
 
 
 
@@ -72,13 +72,13 @@ The agent should record:
 
 
 
-\- git log --oneline -5
+- git log --oneline -5
 
-\- git diff main...HEAD
+- git diff main...HEAD
 
 
 
-\## Forbidden Operations
+## Forbidden Operations
 
 
 
@@ -86,13 +86,15 @@ Agents should not:
 
 
 
-\- force push
+- force push
 
-\- push directly to main
+- push directly to main
 
-\- delete branches
+- delete branches
 
-\- change repository settings
+- change repository settings
 
-\- edit secrets or credentials
+- edit secrets or credentials
+
+
 

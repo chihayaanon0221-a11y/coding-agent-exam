@@ -1,4 +1,4 @@
-\# Versioning Policy
+﻿# Versioning Policy
 
 
 
@@ -6,7 +6,7 @@ This project is currently in the 0.x.y phase.
 
 
 
-\## Current Version
+## Current Version
 
 
 
@@ -14,19 +14,19 @@ v0.1.0 means:
 
 
 
-\- Initial repository scaffold
+- Initial repository scaffold
 
-\- Basic README
+- Basic README
 
-\- Basic AGENTS.md
+- Basic AGENTS.md
 
-\- First sample task
+- First sample task
 
-\- Report template
+- Report template
 
 
 
-\## Next Version
+## Next Version
 
 
 
@@ -34,23 +34,23 @@ v0.1.1 means:
 
 
 
-\- Add agent workflow methodology
+- Add agent workflow methodology
 
-\- Add plan card template
+- Add plan card template
 
-\- Add evaluation rubric
+- Add evaluation rubric
 
-\- Add Git workflow rules
+- Add Git workflow rules
 
-\- Add versioning policy
-
-
-
-\## Version Meaning
+- Add versioning policy
 
 
 
-\### Patch Version
+## Version Meaning
+
+
+
+### Patch Version
 
 
 
@@ -66,15 +66,15 @@ Used for:
 
 
 
-\- documentation updates
+- documentation updates
 
-\- template updates
+- template updates
 
-\- small workflow improvements
+- small workflow improvements
 
 
 
-\### Minor Version
+### Minor Version
 
 
 
@@ -90,15 +90,15 @@ Used for:
 
 
 
-\- new workflow capability
+- new workflow capability
 
-\- new evaluation structure
+- new evaluation structure
 
-\- new runner or report format
+- new runner or report format
 
 
 
-\### Major Version
+### Major Version
 
 
 
@@ -111,4 +111,6 @@ v1.0.0
 
 
 Used only when the project structure becomes stable.
+
+
 
