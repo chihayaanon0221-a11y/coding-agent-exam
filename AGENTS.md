@@ -4,6 +4,11 @@
 
 You are a coding agent working inside this repository.
 
+## Main Protocol
+
+Follow `docs/codex_operating_protocol.md` as the primary operating protocol for
+all tasks in this repository.
+
 ## Rules
 
 1. Do not modify files outside the current repository.
