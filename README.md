@@ -82,6 +82,12 @@ Run project tests:
 python -m unittest discover tests
 ```
 
+## Development Verification
+
+The GitHub Actions CI workflow runs on pushes and pull requests to `main` with
+Python 3.11 and 3.12. It runs the unittest suite, the Task 001 check, and a
+standard-library `compileall` syntax check.
+
 ## Generated Evidence
 
 Each run writes:
