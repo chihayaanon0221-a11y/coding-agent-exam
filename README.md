@@ -1,69 +1,158 @@
 # Coding Agent Exam
 
-A lightweight local harness for testing coding agents on constrained personal
-developer tasks.
+A lightweight evaluation framework prototype for Coding Agents and LLM Agents.
 
-## Goal
+It defines small engineering tasks, runs an agent adapter against toy repos,
+records trace evidence, applies multi-dimensional scorers, and generates
+Markdown/JSON reports that are easy to inspect in a portfolio or code review.
 
-This project explores how coding agents perform in exam-like coding scenarios
-inside a local developer repository.
+## Why This Exists
 
-The current direction is a Personal Developer Coding Agent Harness: task specs,
-baselines, constraints, local verification scripts, Git evidence, attempt
-records, and reports.
+Most public benchmarks are too large for a personal developer workflow. This
+project focuses on the local loop that matters when evaluating a coding agent:
 
-## P0 Scope
+- task definition
+- constrained repo edits
+- deterministic verification
+- patch diff evidence
+- trace logging
+- multi-dimensional scoring
+- reproducible reports
 
-- Create small original coding tasks
-- Provide local baseline projects
-- Run coding agent attempts
-- Record git diff and commit evidence
-- Run local verification scripts
-- Produce manual score reports
+It is not a leaderboard and does not require cloud infrastructure.
 
-## Current Status
+## Core Features
 
-`v0.3.0` establishes the local harness foundation. The project now has a Task
-001 TODO CLI exam, a local verification script, privacy-first model config
-example, and an expandable task catalog.
+- Task packs with `task.yaml`, toy repo, tests, expected behavior, and rubric.
+- Runner CLI: `python -m agent_exam run --task-pack <path>`.
+- Mock agent adapter for deterministic sample runs.
+- Standard-library test execution through task-defined commands.
+- Rule, test, diff, and optional LLM-judge scorer interfaces.
+- JSONL trace, JSON result, patch diff, and Markdown report artifacts.
+- Local-first privacy posture with no default remote API calls.
 
-## Personal Developer Harness Direction
+## Architecture
 
-This project is not a public leaderboard or large cloud benchmark. It is focused
-on personal developer workflows:
+```mermaid
+flowchart LR
+    TP["Task Pack"] --> R["Runner"]
+    A["Agent Adapter"] --> R
+    R --> W["Run Workspace"]
+    W --> S["Scorers"]
+    S --> RES["result.json"]
+    R --> T["trace.jsonl"]
+    RES --> M["report.md"]
+```
 
-- local repositories
-- explicit task constraints
-- Git diff evidence
-- standard-library verification scripts
-- attempt reports
-- future hot-swappable model providers
+## Quick Start
 
-The seven constraints in `docs/codex_operating_protocol.md` remain central.
+Run the bugfix sample:
 
-## How to Run Task 001 Check
+```text
+python -m agent_exam run --task-pack examples/task_packs/basic_bugfix
+```
+
+Run the feature-addition sample:
+
+```text
+python -m agent_exam run --task-pack examples/task_packs/feature_addition
+```
+
+Run all sample task packs:
+
+```text
+python -m agent_exam run --task-pack examples/task_packs
+```
+
+Regenerate a report:
+
+```text
+python -m agent_exam report --run-id <run_id>
+```
+
+Task 001 legacy check still works:
 
 ```text
 python scripts/check_task_001.py
 ```
 
-The checker runs `baselines/task_001_todo_app/app.py` through a short TODO CLI
-session and expects `No tasks.`, `1. [ ] buy milk`, and `1. [x] buy milk`.
+Run project tests:
 
-## Privacy-First Model Config
+```text
+python -m unittest discover tests
+```
 
-See `config/model.example.json`.
+## Generated Evidence
 
-The default recommended mode is `local_only`, using a localhost or loopback
-OpenAI-compatible endpoint such as `http://127.0.0.1:11434/v1`.
+Each run writes:
 
-Remote API usage must be explicit with `remote_api_allowed`. Repository content,
-credentials, secrets, tokens, and account settings must not be uploaded by
-default.
+- `runs/<run_id>/result.json`
+- `runs/<run_id>/trace.jsonl`
+- `runs/<run_id>/report.md`
+- `runs/<run_id>/patch.diff`
+- `runs/<run_id>/test_output.txt`
 
-## Current Limitations
+Fixed sample outputs for GitHub review are stored under:
 
-- No full autonomous agent shell yet.
-- No complex judge agent.
-- No Web UI, database, leaderboard, or cloud runner.
-- Provider code is a lightweight skeleton and does not make real API calls.
+- `docs/sample_reports/sample-basic-bugfix/report.md`
+- `docs/sample_reports/sample-basic-bugfix/result.json`
+- `docs/sample_reports/sample-feature-addition/report.md`
+- `docs/sample_reports/sample-feature-addition/result.json`
+
+To regenerate the same local run IDs:
+
+```text
+python -m agent_exam run --task-pack examples/task_packs/basic_bugfix --run-id sample-basic-bugfix
+python -m agent_exam run --task-pack examples/task_packs/feature_addition --run-id sample-feature-addition
+```
+
+## Adding a Task
+
+Create a directory under `examples/task_packs/` with:
+
+- `task.yaml`
+- `repo/`
+- `tests/`
+- `expected_behavior.md`
+- `rubric.md`
+
+`task.yaml` uses a JSON-compatible YAML subset so the harness stays
+standard-library only. Include `id`, `title`, `scenario`, `difficulty`,
+`repo_path`, `instructions`, `success_criteria`, `allowed_tools`,
+`expected_outputs`, and `scoring_profile`.
+
+## Adding a Scorer
+
+Implement `agent_exam.scorers.base.Scorer` and return a `ScoreResult`.
+
+Current scorers:
+
+- `TestScorer`: runs the configured local test command.
+- `RuleScorer`: checks required files and text patterns.
+- `DiffScorer`: evaluates changed files and diff size.
+- `LLMJudgeScorer`: optional skeleton, skipped by default.
+
+## Privacy Model
+
+The default posture is local-first. The sample mock agent and scorers do not
+upload repository content. OpenAI-compatible adapters are skeletons unless a
+future user explicitly configures remote API use.
+
+Do not store secrets, tokens, credentials, or account settings in task packs,
+run artifacts, or reports.
+
+## Current Boundaries
+
+- The mock agent proves the harness loop; it is not a real autonomous coding
+  agent or real multi-model benchmark.
+- Task specs are parsed as JSON-compatible YAML to avoid third-party packages.
+- LLM judge scoring is optional and skipped by default.
+- No Web UI, database, leaderboard, sandbox isolation, or cloud runner.
+
+## Roadmap
+
+- Add a real local model adapter behind the same agent interface.
+- Support task packs containing multiple tasks.
+- Add stronger patch application and sandbox isolation.
+- Add richer failure analysis from trace events.
+- Add optional HTML report generation.
