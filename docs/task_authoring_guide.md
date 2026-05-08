@@ -18,6 +18,12 @@ structure, but task text and task assets must not be copied from them.
 - Evaluation Criteria
 - Privacy / Permission Notes
 
+## File Format
+
+Task specs are stored as `task.yaml`, but the current standard-library parser
+expects the JSON-compatible YAML subset. This keeps the harness dependency-free
+while leaving room for a richer YAML parser later.
+
 ## Task Types
 
 - CLI Implementation

@@ -1,0 +1,45 @@
+{
+  "id": "feature_addition",
+  "title": "Add slugify text utility",
+  "scenario": "multi-file feature",
+  "difficulty": "easy",
+  "repo_path": "repo",
+  "instructions": "Add slugify(text) to the text utility module. It should lowercase text, collapse whitespace, replace non-alphanumeric separators with dashes, and trim leading or trailing dashes.",
+  "success_criteria": [
+    "The unittest suite passes.",
+    "slugify handles spaces, punctuation, mixed case, and empty-ish input.",
+    "normalize_spaces keeps its existing behavior."
+  ],
+  "allowed_tools": [
+    "python",
+    "unittest",
+    "git diff"
+  ],
+  "expected_outputs": [
+    "A passing unittest run.",
+    "A small addition to repo/text_utils.py."
+  ],
+  "scoring_profile": {
+    "test_command": "python -m unittest discover tests",
+    "required_files": [
+      "repo/text_utils.py"
+    ],
+    "forbidden_files": [
+      "repo/secrets.json"
+    ],
+    "required_text_patterns": [
+      {
+        "path": "repo/text_utils.py",
+        "pattern": "def slugify"
+      }
+    ],
+    "forbidden_text_patterns": [
+      {
+        "path": "repo/text_utils.py",
+        "pattern": "import requests"
+      }
+    ],
+    "max_diff_lines": 80
+  }
+}
+

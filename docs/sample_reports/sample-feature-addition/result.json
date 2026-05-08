@@ -1,0 +1,98 @@
+{
+  "agent_name": "mock",
+  "artifacts": {
+    "patch_diff": "runs\\sample-feature-addition\\patch.diff",
+    "result_json": "runs\\sample-feature-addition\\result.json",
+    "run_dir": "runs\\sample-feature-addition",
+    "workspace": "runs\\sample-feature-addition\\workspace"
+  },
+  "difficulty": "easy",
+  "ended_at": "2026-05-08T05:44:46.699016+00:00",
+  "errors": [],
+  "failure_taxonomy": [],
+  "final_score": 1.0,
+  "report_path": "runs\\sample-feature-addition\\report.md",
+  "run_config": {
+    "agent_name": "mock",
+    "max_steps": 5,
+    "output_dir": "runs",
+    "task_pack_path": "examples\\task_packs\\feature_addition",
+    "timeout_sec": 30
+  },
+  "run_id": "sample-feature-addition",
+  "scenario": "multi-file feature",
+  "scores": [
+    {
+      "comments": "Tests passed.",
+      "evidence": {
+        "command": "python -m unittest discover tests",
+        "cwd": "runs\\sample-feature-addition\\workspace",
+        "output_path": "runs\\sample-feature-addition\\test_output.txt",
+        "returncode": 0
+      },
+      "max_score": 1.0,
+      "passed": true,
+      "score": 1.0,
+      "scorer_name": "test"
+    },
+    {
+      "comments": "4/4 rule checks passed.",
+      "evidence": {
+        "checks": [
+          {
+            "name": "required file exists: repo/text_utils.py",
+            "passed": true
+          },
+          {
+            "name": "forbidden file absent: repo/secrets.json",
+            "passed": true
+          },
+          {
+            "name": "required text in repo\\text_utils.py: def slugify",
+            "passed": true
+          },
+          {
+            "name": "forbidden text absent in repo\\text_utils.py: import requests",
+            "passed": true
+          }
+        ]
+      },
+      "max_score": 1.0,
+      "passed": true,
+      "score": 1.0,
+      "scorer_name": "rule"
+    },
+    {
+      "comments": "Diff size is within the configured limit.",
+      "evidence": {
+        "changed_files": [
+          "text_utils.py"
+        ],
+        "diff_lines": 14,
+        "max_diff_lines": 80,
+        "original_repo": "examples\\task_packs\\feature_addition\\repo",
+        "working_repo": "runs\\sample-feature-addition\\workspace\\repo"
+      },
+      "max_score": 1.0,
+      "passed": true,
+      "score": 1.0,
+      "scorer_name": "diff"
+    },
+    {
+      "comments": "Optional LLM judge skipped.",
+      "evidence": {
+        "reason": "AGENT_EXAM_JUDGE_API_KEY is not set",
+        "skipped": true
+      },
+      "max_score": 1.0,
+      "passed": true,
+      "score": 0.0,
+      "scorer_name": "llm_judge"
+    }
+  ],
+  "started_at": "2026-05-08T05:44:46.604288+00:00",
+  "status": "passed",
+  "task_id": "feature_addition",
+  "task_pack_path": "examples\\task_packs\\feature_addition",
+  "trace_path": "runs\\sample-feature-addition\\trace.jsonl"
+}
